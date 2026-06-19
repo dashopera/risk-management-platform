@@ -5,7 +5,15 @@ import {
   DatePicker, Switch, Tooltip, Popconfirm, message,
 } from 'antd';
 import type { TableProps, TableColumnType } from 'antd';
-import type { TablePaginationConfig, SorterResult, FilterValue } from 'antd/es/table';
+import type { TablePaginationConfig } from 'antd/es/table';
+
+type SorterResult<T = SecurityRisk> = {
+  column?: TableColumnType<T>;
+  order?: string | null;
+  field?: string | number | (string | number)[];
+  columnKey?: string;
+};
+type FilterValue = (string | number | boolean)[];
 import {
   PlusOutlined, ImportOutlined, ExportOutlined,
   SearchOutlined, EyeOutlined, EditOutlined, DeleteOutlined,
