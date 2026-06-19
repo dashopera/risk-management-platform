@@ -4,7 +4,8 @@ import {
   Button, Card, Table, Tag, Input, Space, Checkbox, Select,
   DatePicker, Switch, Tooltip, Popconfirm, message,
 } from 'antd';
-import type { TableProps, TableColumnType, TablePaginationConfig, SorterResult, FilterValue } from 'antd';
+import type { TableProps, TableColumnType } from 'antd';
+import type { TablePaginationConfig, SorterResult, FilterValue } from 'antd/es/table';
 import {
   PlusOutlined, ImportOutlined, ExportOutlined,
   SearchOutlined, EyeOutlined, EditOutlined, DeleteOutlined,
