@@ -157,9 +157,9 @@ function execToObjects(db: Awaited<ReturnType<typeof getDatabase>>, sql: string)
     const results = db.exec(sql);
     if (results.length === 0) return [];
     const [{ columns, values }] = results;
-    return values.map(row => {
+    return values.map((row: unknown[]) => {
       const obj: Record<string, unknown> = {};
-      columns.forEach((col, i) => {
+      columns.forEach((col: string, i: number) => {
         obj[col] = row[i];
       });
       return obj;
@@ -322,7 +322,7 @@ export async function createRisk(data: Partial<SecurityRisk>): Promise<SecurityR
     ]
   );
   saveDatabase();
-  const escapedRiskNo = data.risk_no.replace(/'/g, "''");
+  const escapedRiskNo = (data.risk_no ?? '').replace(/'/g, "''");
   const rows = execToObjects(db, `SELECT * FROM security_risks WHERE risk_no = '${escapedRiskNo}'`);
   return rowToRisk(rows[0]);
 }

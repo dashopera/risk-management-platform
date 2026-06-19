@@ -45,7 +45,7 @@ export async function initDatabase(): Promise<void> {
 export function saveDatabase(): void {
   if (!db) return;
   const data = db.export();
-  const buf = data.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
+  const buf = data.reduce((acc: string, byte: number) => acc + String.fromCharCode(byte), '');
   localStorage.setItem('risk_management_db', btoa(buf));
 }
 

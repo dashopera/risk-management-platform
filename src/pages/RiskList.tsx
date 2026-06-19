@@ -4,7 +4,7 @@ import {
   Button, Card, Table, Tag, Input, Space, Checkbox, Select,
   DatePicker, Switch, Tooltip, Popconfirm, message,
 } from 'antd';
-import type { TableProps, TableColumnType } from 'antd';
+import type { TableProps, TableColumnType, TablePaginationConfig, SorterResult, FilterValue } from 'antd';
 import {
   PlusOutlined, ImportOutlined, ExportOutlined,
   SearchOutlined, EyeOutlined, EditOutlined, DeleteOutlined,
@@ -104,8 +104,8 @@ export default function RiskList() {
     if (sortField && sortOrder) {
       const dir = sortOrder === 'ascend' ? 1 : -1;
       data.sort((a, b) => {
-        const aVal = (a as Record<string, unknown>)[sortField];
-        const bVal = (b as Record<string, unknown>)[sortField];
+        const aVal = (a as unknown as Record<string, unknown>)[sortField];
+        const bVal = (b as unknown as Record<string, unknown>)[sortField];
         if (typeof aVal === 'number' && typeof bVal === 'number') {
           return (aVal - bVal) * dir;
         }
@@ -293,7 +293,7 @@ export default function RiskList() {
   ];
 
   // 表格排序变化
-  const handleTableChange: TableProps['onChange'] = (paginationConfig, _filters, sorter) => {
+  const handleTableChange = (paginationConfig: TablePaginationConfig, _filters: Record<string, FilterValue | null>, sorter: SorterResult<SecurityRisk> | SorterResult<SecurityRisk>[]) => {
     setPagination({
       current: paginationConfig.current || 1,
       pageSize: paginationConfig.pageSize || 20,
